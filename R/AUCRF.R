@@ -57,7 +57,7 @@ while(k>=k0){
 	if(getAUC>=auxThres) RFopt <- fitRF
 	AUCcurve <- rbind(c(k,getAUC),AUCcurve)
 	k <- k-as.integer(pdel*k)-1
-	fmla <- as.formula(paste(yname," ~ ", paste(vars[1:k], collapse= "+"))))
+	fmla <- as.formula(paste(yname," ~ ", paste(vars[1:k], collapse= "+")))
 }
  
 colnames(AUCcurve) <- c("k","AUC")
