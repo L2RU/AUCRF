@@ -46,8 +46,9 @@ yname <- as.character(eval(cl[[mf]])[[2]])
   auxThres <- 0
   auxMaxAUC <- 0
   k <- length(vars)
+  fmla <- formula
 while(k>=k0){
-	fitRF <- randomForest(formula,data=data[,c(yname,vars[1:k])],...)
+	fitRF <- randomForest(fmla,data=data[,c(yname,vars[1:k])],...)
 	getAUC <- AUC.randomForest(fitRF)
 	if(getAUC>=auxMaxAUC){
 		auxMaxAUC <- getAUC
@@ -56,6 +57,7 @@ while(k>=k0){
 	if(getAUC>=auxThres) RFopt <- fitRF
 	AUCcurve <- rbind(c(k,getAUC),AUCcurve)
 	k <- k-as.integer(pdel*k)-1
+	fmla <- as.formula(paste(yname," ~ ", paste(vars[1:k], collapse= "+"))))
 }
  
 colnames(AUCcurve) <- c("k","AUC")
